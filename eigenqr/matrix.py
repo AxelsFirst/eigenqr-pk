@@ -55,8 +55,11 @@ class Matrix(object):
         other: an instance of a Matrix class.
 
         """
-        
-        return Matrix(np.matmul(self.matrix, other.matrix))
+
+        if type(other) == int:
+            return Matrix(np.multiply(self.matrix, other))
+        else:
+            return Matrix(np.matmul(self.matrix, other.matrix))
 
     def qr_decomposition(self):
         """

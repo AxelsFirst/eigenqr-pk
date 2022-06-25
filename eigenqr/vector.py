@@ -64,7 +64,7 @@ class Vector(object):
 
         is_all_zero = np.all((self.vector == 0))
         if is_all_zero:
-            return self.vector
+            return self
         else:
             return Vector(self.vector/np.linalg.norm(self.vector))
 
@@ -89,7 +89,7 @@ class Vector(object):
 
         alpha = rho * norm_of_self
 
-        z = self.vector - alpha * e1
+        z = Vector(self.vector - alpha * e1)
         u = z.normalization()
 
         return u
@@ -109,13 +109,13 @@ class Vector(object):
 
         """
 
-        from eigenqr.matrix import identity_matrix
+        from eigenqr.matrix import Matrix, identity_matrix
 
         n = len(self.vector)
         I_n = identity_matrix(n)
         u = self.householder_vector()
 
-        P = I_n - 2 * (u * u)
+        P = Matrix(I_n - (u * u) * 2)
 
         return P
 

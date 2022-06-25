@@ -29,3 +29,11 @@ class Vector(object):
 
         """
         return Matrix(np.outer(self.vector, other.vector))
+
+    def norm(self):
+        """
+
+        Norm of the vector
+
+        """
+        return np.linalg.norm(self.vector)

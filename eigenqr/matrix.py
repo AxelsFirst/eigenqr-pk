@@ -102,56 +102,58 @@ class Matrix(object):
 
         return Matrix(direct_sum)
 
-    def householder_application(self, x, i):
+    def qr_algorithm(self, n_max, eps):
         """
 
-        Create a Householder reflector
+        Calculates eigenvalues of a matrix using the QR algorithm
 
         Parameters:
         -----------
-        x: an instance of a Vector class.
-        i: an integer.
+        n_max: an integer.
+        eps: a float.
 
         Output:
         -------
-        P_i: an instance of a Matrix class.
+        eigenvalues: a list.
 
         """
 
-        I_n = identity_matrix(i)
-        P = x.householder_reflector()
+        from scipy import linalg as la
 
-        P_i = I_n.direct_sum(P)
+        H = Matrix(la.hessenberg(self.matrix))
+        n = H.matrix.shape[0]
 
-        return P_i
+        for i in range(n_max):
+            Q, R = H.qr_decomposition()
+            H = R * Q
 
-    def hessenberg_form(self):
-        """
+        eigenvalues = []
 
-        Create a Hessenberg form of a matrix
+        i = 0
+        while i < n:
+            if i == n-1:
+                eigenvalues.append(H.matrix[i, i])
 
-        Output:
-        -------
-        H: an instance of a Matrix class.
+            elif abs(H.matrix[i+1, i]) < eps:
+                eigenvalues.append(H.matrix[i, i])
 
-        """
+            else:
+                a = H.matrix[i, i]
+                b = H.matrix[i, i+1]
+                c = H.matrix[i+1, i]
+                d = H.matrix[i+1, i+1]
+                B = -1*(a+d)
+                C = a*d - b*c
+                eigen_plus = (-B + np.sqrt(B**2 - 4*C))/2
+                eigen_minus = (-B - np.sqrt(B**2 - 4*C))/2
 
-        from eigenqr.vector import zero_vector
-        from copy import deepcopy
+                eigenvalues.append(eigen_plus)
+                eigenvalues.append(eigen_minus)
 
-        n = np.shape(self.matrix)[0]
-        H = deepcopy(self)
+                i += 1
+            i += 1
 
-        for i in range(1, n-2):
-            x = zero_vector(n-i)
-
-            for k in range(i, n):
-                x[k-i] = H.matrix[k, i-1]
-
-            H = H.householder_application(x, i) * H
-            H = H * H.householder_application(x, i)
-
-        return H
+        return eigenvalues
 
 
 def identity_matrix(n):

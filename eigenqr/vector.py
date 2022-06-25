@@ -68,57 +68,6 @@ class Vector(object):
         else:
             return Vector(self.vector/np.linalg.norm(self.vector))
 
-    def householder_vector(self):
-        """
-
-        Get a vector used in Householder reduction
-
-        Output:
-        -------
-        u: an instance of a Vector class.
-
-        """
-
-        n = len(self.vector)
-        norm_of_self = self.norm()
-        rho = np.sign(self.vector[0])
-        e1 = unit_vector(n)
-
-        if rho == 0:
-            rho = 1
-
-        alpha = rho * norm_of_self
-
-        z = Vector(self.vector - alpha * e1)
-        u = z.normalization()
-
-        return u
-
-    def householder_reflector(self):
-        """
-
-        Create a Householder reflector
-
-        Parameters:
-        -----------
-        x: an instance of a Vector class.
-
-        Output:
-        -------
-        P: an instance of a Matrix class.
-
-        """
-
-        from eigenqr.matrix import identity_matrix
-
-        n = len(self.vector)
-        I_n = identity_matrix(n)
-        u = self.householder_vector()
-
-        P = I_n - (u * u) * 2
-
-        return P
-
 
 def unit_vector(n):
     """

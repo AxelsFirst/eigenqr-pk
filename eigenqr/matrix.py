@@ -16,5 +16,6 @@ class Matrix(object):
 
         """
 
-        self.matrix = np.matrix(matrix)
+        self.matrix = np.array(matrix)
+    
     

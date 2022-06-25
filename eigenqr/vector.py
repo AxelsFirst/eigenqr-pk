@@ -109,13 +109,13 @@ class Vector(object):
 
         """
 
-        from eigenqr.matrix import Matrix, identity_matrix
+        from eigenqr.matrix import identity_matrix
 
         n = len(self.vector)
         I_n = identity_matrix(n)
         u = self.householder_vector()
 
-        P = Matrix(I_n - (u * u) * 2)
+        P = I_n - (u * u) * 2
 
         return P
 

@@ -118,8 +118,7 @@ class Matrix(object):
 
         """
 
-        n = len(self.matrix)
-        I_n = identity_matrix(n-i)
+        I_n = identity_matrix(i)
         P = x.householder_reflector()
 
         P_i = I_n.direct_sum(P)
@@ -140,14 +139,14 @@ class Matrix(object):
         from eigenqr.vector import zero_vector
         from copy import deepcopy
 
-        n = 2
+        n = np.shape(self.matrix)[0]
         H = deepcopy(self)
 
         for i in range(1, n-2):
             x = zero_vector(n-i)
 
-            for k in range(i+1, n+1):
-                x[k] = H.matrix[k, i]
+            for k in range(i, n):
+                x[k-i] = H.matrix[k, i-1]
 
             H = H.householder_application(x, i) * H
             H = H * H.householder_application(x, i)

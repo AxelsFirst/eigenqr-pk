@@ -84,15 +84,25 @@ class Matrix(object):
     #     P = I_n - 2 * (u * u)
     #     return P
 
-    # def P_n(self, x):
+    # def P_n(self, x, i):
+    #     n = len(self.matrix)
+    #     I_n = identity_matrix(n-i)
     #     return direct_sum(I_n, householder_reflector(x))
 
     # def hessenberg_form(self):
     #     A = self
     #     n = 2
+    #     H = A
     #     for i in range(1, n-2):
-    #         # compute u_i using x = [A[i+1,i], ..., A[n, k]]
+    """
+    #         # compute u_i using x = [A[i+1,i], ..., A[n, i]]
     #         # compute P_i * A
-    #         # compute P_k A P*_k
-    #     H = P_k A P*_k
+    #         # compute P_i * A * P*_i
+    """
+    #         x = zero_vector(n-i)
+    #         for k in range(i+1, n+1):
+    #             x[k] = A[k, i]
+    #         H = P_i() * H
+    #         H = H * P_i() ?
+    #     #H = P_k A P*_k
     #     return H

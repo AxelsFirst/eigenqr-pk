@@ -49,3 +49,8 @@ class Vector(object):
           return self.vector
         else:
           return self.vector/np.linalg.norm(self.vector)
+
+
+def unit_vector(size):
+  return np.array([1,np.zeros((size-1,), dtype=int)])
+unit_vector(5)

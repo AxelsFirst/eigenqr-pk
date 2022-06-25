@@ -37,3 +37,15 @@ class Vector(object):
 
         """
         return np.linalg.norm(self.vector)
+
+    def normalization(self):
+        """
+
+        normalization of the vector
+
+        """
+        is_all_zero = np.all((self.vector == 0))
+        if is_all_zero:
+          return self.vector
+        else:
+          return self.vector/np.linalg.norm(self.vector)

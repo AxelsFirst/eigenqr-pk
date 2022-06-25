@@ -1,5 +1,5 @@
 import numpy as np
-import eigenqr.vector as ve
+from eigenqr.vector import Vector
 
 
 class Matrix(object):
@@ -134,30 +134,6 @@ def identity_matrix(n):
     return Matrix(np.identity(n))
 
 
-def householder_reflector(x):
-    """
-
-    Create a Householder reflector
-
-    Parameters:
-    -----------
-    x: an instance of a Vector class.
-
-    Output:
-    -------
-    P: an instance of a Matrix class.
-
-    """
-
-    n = len(x)
-    I_n = identity_matrix(n)
-    u = ve.householder_vector(x)
-
-    P = I_n - 2 * (u * u)
-
-    return P
-
-
 def householder_application(A, x, i):
     """
 
@@ -177,7 +153,7 @@ def householder_application(A, x, i):
 
     n = len(A.matrix)
     I_n = identity_matrix(n-i)
-    P = householder_reflector(x)
+    P = x.householder_reflector()
 
     P_i = I_n.direct_sum(P)
 

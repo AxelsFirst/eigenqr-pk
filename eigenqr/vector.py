@@ -1,5 +1,5 @@
 import numpy as np
-from matrix import Matrix
+from matrix import Matrix, identity_matrix
 
 
 class Vector(object):
@@ -92,6 +92,29 @@ class Vector(object):
         u = z.normalization()
 
         return u
+
+    def householder_reflector(self):
+        """
+
+        Create a Householder reflector
+
+        Parameters:
+        -----------
+        x: an instance of a Vector class.
+
+        Output:
+        -------
+        P: an instance of a Matrix class.
+
+        """
+
+        n = len(self.vector)
+        I_n = identity_matrix(n)
+        u = self.householder_vector()
+
+        P = I_n - 2 * (u * u)
+
+        return P
 
 
 def unit_vector(size):

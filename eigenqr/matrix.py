@@ -98,7 +98,41 @@ class Matrix(object):
 
         return direct_sum
 
+    def householder_application(self, x, i):
+        """
+
+        Create a Householder reflector
+
+        Parameters:
+        -----------
+        x: an instance of a Vector class.
+        i: an integer.
+
+        Output:
+        -------
+        P_i: an instance of a Matrix class.
+
+        """
+
+        n = len(self.matrix)
+        I_n = identity_matrix(n-i)
+        P = x.householder_reflector()
+
+        P_i = I_n.direct_sum(P)
+
+        return P_i
+
     def hessenberg_form(self):
+        """
+
+        Create a Hessenberg form of a matrix
+
+        Output:
+        -------
+        H: an instance of a Matrix class.
+
+        """
+
         n = 2
         H = deepcopy(self)
 
@@ -108,8 +142,8 @@ class Matrix(object):
             for k in range(i+1, n+1):
                 x[k] = H.matrix[k, i]
 
-            H = householder_application(H, x, i) * H
-            H = H * householder_application(H, x, i)()
+            H = H.householder_application(x, i) * H
+            H = H * H.householder_application(x, i)
 
         return H
 
@@ -130,29 +164,3 @@ def identity_matrix(n):
     """
 
     return Matrix(np.identity(n))
-
-
-def householder_application(A, x, i):
-    """
-
-    Create a Householder reflector
-
-    Parameters:
-    -----------
-    A: an instance of a Matrix class.
-    x: an instance of a Vector class.
-    i: an integer.
-
-    Output:
-    -------
-    P_i: an instance of a Matrix class.
-
-    """
-
-    n = len(A.matrix)
-    I_n = identity_matrix(n-i)
-    P = x.householder_reflector()
-
-    P_i = I_n.direct_sum(P)
-
-    return P_i

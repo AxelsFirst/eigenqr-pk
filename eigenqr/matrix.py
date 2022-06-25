@@ -29,3 +29,15 @@ class Matrix(object):
 
         """
         return Matrix(np.add(self.matrix, other.matrix))
+
+    def __sub__(self, other):
+        """
+
+        Subtraction of matrices
+
+        Parameters:
+        -----------
+        other: an instance of a Matrix class.
+
+        """
+        return Matrix(np.subtract(self.matrix, other.matrix))

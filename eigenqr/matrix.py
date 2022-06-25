@@ -76,3 +76,23 @@ class Matrix(object):
         R = Matrix(QR[1])
 
         return Q, R
+
+    # def householder_reflector(self, x):
+    #     n = len(x)
+    #     I_n = identity_matrix(n)
+    #     u = x.u()
+    #     P = I_n - 2 * (u * u)
+    #     return P
+
+    # def P_n(self, x):
+    #     return direct_sum(I_n, householder_reflector(x))
+
+    # def hessenberg_form(self):
+    #     A = self
+    #     n = 2
+    #     for i in range(1, n-2):
+    #         # compute u_i using x = [A[i+1,i], ..., A[n, k]]
+    #         # compute P_i * A
+    #         # compute P_k A P*_k
+    #     H = P_k A P*_k
+    #     return H

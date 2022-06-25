@@ -66,7 +66,7 @@ class Vector(object):
         if is_all_zero:
             return self.vector
         else:
-            return self.vector/np.linalg.norm(self.vector)
+            return Vector(self.vector/np.linalg.norm(self.vector))
 
     def householder_vector(self):
         """
@@ -131,8 +131,8 @@ def unit_vector(n):
 
     """
 
-    e1 = np.zeros((1, n))
-    e1[0, 0] = 1
+    e1 = np.zeros((n, ))
+    e1[0] = 1
 
     return e1
 

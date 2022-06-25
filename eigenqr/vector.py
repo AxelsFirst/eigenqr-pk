@@ -1,5 +1,5 @@
 import numpy as np
-from matrix import Matrix, identity_matrix
+from eigenqr.matrix import Matrix, identity_matrix
 
 
 class Vector(object):

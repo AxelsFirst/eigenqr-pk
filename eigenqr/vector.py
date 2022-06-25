@@ -129,3 +129,21 @@ def unit_vector(size):
     """
 
     return np.array([1, np.zeros((size-1,), dtype=int)])
+
+
+def zero_vector(n):
+    """
+
+    Get a zero vector
+
+    Parameters:
+    -----------
+    n: an integer.
+
+    Output:
+    -------
+    v0: an instance of a Vector class.
+
+    """
+
+    return np.array(np.zeros((n,), dtype=int))

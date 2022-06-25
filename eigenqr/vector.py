@@ -1,5 +1,4 @@
 import numpy as np
-from eigenqr.matrix import Matrix, identity_matrix
 
 
 class Vector(object):
@@ -34,6 +33,8 @@ class Vector(object):
         M: an instance of a Matrix class.
 
         """
+
+        from eigenqr.matrix import Matrix
 
         return Matrix(np.outer(self.vector, other.vector))
 
@@ -107,6 +108,8 @@ class Vector(object):
         P: an instance of a Matrix class.
 
         """
+
+        from eigenqr.matrix import identity_matrix
 
         n = len(self.vector)
         I_n = identity_matrix(n)

@@ -1,6 +1,4 @@
 import numpy as np
-from eigenqr.vector import Vector, zero_vector
-from copy import deepcopy
 
 
 class Matrix(object):
@@ -132,6 +130,9 @@ class Matrix(object):
         H: an instance of a Matrix class.
 
         """
+
+        from eigenqr.vector import zero_vector
+        from copy import deepcopy
 
         n = 2
         H = deepcopy(self)

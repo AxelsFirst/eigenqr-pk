@@ -29,6 +29,7 @@ class Matrix(object):
         other: an instance of a Matrix class.
 
         """
+
         return Matrix(np.add(self.matrix, other.matrix))
 
     def __sub__(self, other):
@@ -41,6 +42,7 @@ class Matrix(object):
         other: an instance of a Matrix class.
 
         """
+
         return Matrix(np.subtract(self.matrix, other.matrix))
 
     def __mul__(self, other):
@@ -53,6 +55,7 @@ class Matrix(object):
         other: an instance of a Matrix class.
 
         """
+        
         return Matrix(np.matmul(self.matrix, other.matrix))
 
     def qr_decomposition(self):

@@ -80,3 +80,30 @@ def unit_vector(size):
     """
 
     return np.array([1, np.zeros((size-1,), dtype=int)])
+
+
+def householder_vector(x):
+    """
+
+    Get a vector used in Householder reduction
+
+    Output:
+    -------
+    u: an instance of a Vector class.
+
+    """
+
+    n = len(x)
+    norm_of_x = x.norm()
+    rho = np.sign(x[0])
+    e1 = unit_vector(n)
+
+    if rho == 0:
+        rho = 1
+
+    alpha = rho * norm_of_x
+
+    z = x - alpha * e1
+    u = z.normalization()
+
+    return u

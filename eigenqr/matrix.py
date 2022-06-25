@@ -1,5 +1,6 @@
 import numpy as np
-from eigenqr.vector import Vector
+from eigenqr.vector import Vector, zero_vector
+from copy import deepcopy
 
 
 class Matrix(object):
@@ -97,23 +98,20 @@ class Matrix(object):
 
         return direct_sum
 
-    # def hessenberg_form(self):
-    #     A = self
-    #     n = 2
-    #     H = A
-    #     for i in range(1, n-2):
-    """
-    #         # compute u_i using x = [A[i+1,i], ..., A[n, i]]
-    #         # compute P_i * A
-    #         # compute P_i * A * P*_i
-    """
-    #         x = zero_vector(n-i)
-    #         for k in range(i+1, n+1):
-    #             x[k] = A[k, i]
-    #         H = P_i() * H
-    #         H = H * P_i() ?
-    #     #H = P_k A P*_k
-    #     return H
+    def hessenberg_form(self):
+        n = 2
+        H = deepcopy(self)
+
+        for i in range(1, n-2):
+            x = zero_vector(n-i)
+
+            for k in range(i+1, n+1):
+                x[k] = H.matrix[k, i]
+
+            H = householder_application(H, x, i) * H
+            H = H * householder_application(H, x, i)()
+
+        return H
 
 
 def identity_matrix(n):

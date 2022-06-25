@@ -152,4 +152,4 @@ def zero_vector(n):
 
     """
 
-    return np.array(np.zeros((n,), dtype=int))
+    return np.array(np.zeros((n,)))

@@ -95,12 +95,12 @@ class Matrix(object):
         """
 
         direct_sum = np.zeros(np.add(self.matrix.shape,
-                              other.matrix.shape), dtype=int)
+                              other.matrix.shape))
 
         direct_sum[:self.matrix.shape[0], :self.matrix.shape[1]] = self.matrix
         direct_sum[self.matrix.shape[0]:, self.matrix.shape[1]:] = other.matrix
 
-        return direct_sum
+        return Matrix(direct_sum)
 
     def householder_application(self, x, i):
         """

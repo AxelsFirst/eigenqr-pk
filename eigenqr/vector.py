@@ -120,7 +120,7 @@ class Vector(object):
         return P
 
 
-def unit_vector(size):
+def unit_vector(n):
     """
 
     Get a unit vector
@@ -131,7 +131,10 @@ def unit_vector(size):
 
     """
 
-    return np.array([1, np.zeros((size-1,), dtype=int)])
+    e1 = np.zeros((1, n))
+    e1[0, 0] = 1
+
+    return e1
 
 
 def zero_vector(n):

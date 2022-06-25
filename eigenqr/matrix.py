@@ -54,3 +54,25 @@ class Matrix(object):
 
         """
         return Matrix(np.matmul(self.matrix, other.matrix))
+
+    def qr_decomposition(self):
+        """
+
+        Calculates QR decomposition of a matrix
+
+        Output:
+        -------
+        Q: an instance of a Matrix class
+            Q is orthogonal
+
+        R: an instance of a Matrix class
+            R is upper triangular
+
+        """
+
+        QR = np.linalg.qr(self.matrix)
+
+        Q = Matrix(QR[0])
+        R = Matrix(QR[1])
+
+        return Q, R

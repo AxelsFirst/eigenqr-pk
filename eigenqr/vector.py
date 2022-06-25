@@ -1,12 +1,14 @@
 import numpy as np
 from matrix import Matrix
 
+
 class Vector(object):
     """
 
     Representation of vectors.
 
     """
+
     def __init__(self, vector):
         """
 
@@ -21,36 +23,60 @@ class Vector(object):
     def __mul__(self, other):
         """
 
-        Multiplication of vectors
+        Outer product of vectors
 
         Parameters:
         -----------
         other: an instance of a Vector class.
 
+        Output:
+        -------
+        M: an instance of a Matrix class.
+
         """
+
         return Matrix(np.outer(self.vector, other.vector))
 
     def norm(self):
         """
 
-        Norm of the vector
+        Calculate norm of a vector
+
+        Output:
+        -------
+        norm: an integer.
 
         """
+
         return np.linalg.norm(self.vector)
 
     def normalization(self):
         """
 
-        normalization of the vector
+        Get a normalized vector
+
+        Output:
+        -------
+        normalized_vector: an instance of a Vector class.
 
         """
+
         is_all_zero = np.all((self.vector == 0))
         if is_all_zero:
-          return self.vector
+            return self.vector
         else:
-          return self.vector/np.linalg.norm(self.vector)
+            return self.vector/np.linalg.norm(self.vector)
 
 
 def unit_vector(size):
-  return np.array([1,np.zeros((size-1,), dtype=int)])
-unit_vector(5)
+    """
+
+    Get a unit vector
+
+    Output:
+    -------
+    e1: an instance of a Vector class.
+
+    """
+
+    return np.array([1, np.zeros((size-1,), dtype=int)])

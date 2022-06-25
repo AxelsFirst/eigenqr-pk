@@ -1,5 +1,5 @@
 import numpy as np
-
+from matrix import Matrix
 
 class Vector(object):
     """
@@ -28,4 +28,4 @@ class Vector(object):
         other: an instance of a Vector class.
 
         """
-        return Vector(np.outer(self.vector, other.vector))
+        return Matrix(np.outer(self.vector, other.vector))

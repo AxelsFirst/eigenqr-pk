@@ -67,6 +67,32 @@ class Vector(object):
         else:
             return self.vector/np.linalg.norm(self.vector)
 
+    def householder_vector(self):
+        """
+
+        Get a vector used in Householder reduction
+
+        Output:
+        -------
+        u: an instance of a Vector class.
+
+        """
+
+        n = len(self.vector)
+        norm_of_self = self.norm()
+        rho = np.sign(self.vector[0])
+        e1 = unit_vector(n)
+
+        if rho == 0:
+            rho = 1
+
+        alpha = rho * norm_of_self
+
+        z = self.vector - alpha * e1
+        u = z.normalization()
+
+        return u
+
 
 def unit_vector(size):
     """
@@ -80,30 +106,3 @@ def unit_vector(size):
     """
 
     return np.array([1, np.zeros((size-1,), dtype=int)])
-
-
-def householder_vector(x):
-    """
-
-    Get a vector used in Householder reduction
-
-    Output:
-    -------
-    u: an instance of a Vector class.
-
-    """
-
-    n = len(x)
-    norm_of_x = x.norm()
-    rho = np.sign(x[0])
-    e1 = unit_vector(n)
-
-    if rho == 0:
-        rho = 1
-
-    alpha = rho * norm_of_x
-
-    z = x - alpha * e1
-    u = z.normalization()
-
-    return u

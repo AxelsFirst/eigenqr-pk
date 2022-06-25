@@ -95,3 +95,21 @@ class Matrix(object):
         direct_sum[self.matrix.shape[0]:, self.matrix.shape[1]:] = other.matrix
 
         return direct_sum
+
+
+def identity_matrix(n):
+    """
+
+    Create identity Matrix
+
+    Parameters:
+    -----------
+    n: an integer.
+
+    Output:
+    -------
+    I_n: an instance of a Matrix class.
+
+    """
+
+    return Matrix(np.identity(n))

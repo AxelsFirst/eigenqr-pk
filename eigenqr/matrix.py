@@ -1,4 +1,5 @@
 import numpy as np
+import eigenqr.vector as ve
 
 
 class Matrix(object):
@@ -96,17 +97,27 @@ class Matrix(object):
 
         return direct_sum
 
-    # def householder_reflector(self, x):
-    #     n = len(x)
-    #     I_n = identity_matrix(n)
-    #     u = x.u()
-    #     P = I_n - 2 * (u * u)
-    #     return P
+    def householder_application(self, x, i):
+        """
 
-    # def P_n(self, x, i):
-    #     n = len(self.matrix)
-    #     I_n = identity_matrix(n-i)
-    #     return direct_sum(I_n, householder_reflector(x))
+        Create a Householder reflector
+
+        Parameters:
+        -----------
+        x: an instance of a Vector class.
+
+        Output:
+        -------
+        P_i: an instance of a Matrix class.
+
+        """
+
+        n = len(self.matrix)
+        I_n = identity_matrix(n-i)
+
+        P_i = I_n.direct_sum(householder_reflector(x))
+
+        return P_i
 
     # def hessenberg_form(self):
     #     A = self
@@ -143,3 +154,27 @@ def identity_matrix(n):
     """
 
     return Matrix(np.identity(n))
+
+
+def householder_reflector(x):
+    """
+
+    Create a Householder reflector
+
+    Parameters:
+    -----------
+    x: an instance of a Vector class.
+
+    Output:
+    -------
+    P: an instance of a Matrix class.
+
+    """
+
+    n = len(x)
+    I_n = identity_matrix(n)
+    u = ve.householder_vector(x)
+
+    P = I_n - 2 * (u * u)
+
+    return P

@@ -76,3 +76,40 @@ class Matrix(object):
         R = Matrix(QR[1])
 
         return Q, R
+
+    def direct_sum(self, other):
+        """
+
+        Direct addition of matrices
+
+        Parameters:
+        -----------
+        other: an instance of a Matrix class.
+
+        """
+
+        direct_sum = np.zeros(np.add(self.matrix.shape,
+                              other.matrix.shape), dtype=int)
+
+        direct_sum[:self.matrix.shape[0], :self.matrix.shape[1]] = self.matrix
+        direct_sum[self.matrix.shape[0]:, self.matrix.shape[1]:] = other.matrix
+
+        return direct_sum
+
+
+def identity_matrix(n):
+    """
+
+    Create identity Matrix
+
+    Parameters:
+    -----------
+    n: an integer.
+
+    Output:
+    -------
+    I_n: an instance of a Matrix class.
+
+    """
+
+    return Matrix(np.identity(n))

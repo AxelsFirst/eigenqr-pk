@@ -33,10 +33,11 @@ class Cli_app():
 
         print('\nEigenQR-PK')
 
-        print('\nPrzedstawiony przez:')
+        print('\nAutorstwa:')
         print('Julia Bugaj, Dawid Kapcia, Alex Gibała, Szymon Forysiuk')
 
-        print("Celem naszego projektu jest zaimplementowanie algorytmu QR do obliczania" + "wartości własnych macierzy.")
+        print("Naszym celem jest zaprogramowanie aplikacji do obliczania"
+              + " wartości własnych macierzy za pomocą algorytmu QR.")
 
     def help(self):
         """
@@ -48,14 +49,14 @@ class Cli_app():
         print('\n   Lista możliwych komend:')
 
         print('\nmatrix: wprowadź macierz')
-        print('deco: QR rozkład')
-        print('algo: QR algorytm')
-        print('intro: informacja')
+        print('deco: dokonać rozkładu QR')
+        print('algo: dokonać algorytmu QR')
+        print('intro: podstawowe informacje')
         print('help: lista komend')
-        print('end: zamkniecie aplikacji')
+        print('end: wyjście z aplikacji')
 
-
-        print('\nNa przykład, aby użyć polecenia "matrix", wpisz "matrix".')
+        print('\nPrzykładowo w celu wprowadzenia macierzy wpisz'
+              + ' w wiersz polecenia komendę "matrix".')
 
     def wrong_input(self):
         """
@@ -65,7 +66,7 @@ class Cli_app():
         """
 
         print('\nNieprawidłowa komenda!')
-        print('Aby sprawdzić, jakie polecenia są możliwe, wpisz polecenie "help".')
+        print('Aby sprawdzić jakie komendy są możliwe, wpisz komendę "help".')
 
     def user_input(self):
         """
@@ -90,8 +91,8 @@ class Cli_app():
         self.qr_algo = None
 
         while True:
-            print('\nJaki będzie wymiar macierzy?')
-            print('Pamiętaj, że zalecamy używanie macierzy o '
+            print('\nJaki jest wymiar macierzy?')
+            print('Pamiętaj, że zalecamy używanie macierzy o'
                   + ' wymiarze większym niż 4.')
             try:
                 dimension = int(input('Wpisz tutaj: '))
@@ -100,20 +101,24 @@ class Cli_app():
                     break
 
                 else:
-                    print('\nWprowadź dodatnią liczbę całkowitą większą od 4!')
+                    print('\nProsimy wprowadzić dodatnią liczbę'
+                          + ' całkowitą większą od 4!')
 
             except ValueError:
-                print('\nWprowadź liczbę całkowitą!')
+                print('\nProsimy wprowadzić liczbę całkowitą!')
 
-        print('\nJakie będą wartości macierzy?')
-        print('Pamiętaj o dzieleniu liczb za pomocą spacji.')
-        print('Napisz wartości złożone, na przykład 2+3j.')
+        print('\nJakie są wartości macierzy?')
+        print('Pamiętaj o umieszczaniu przerw pomiędzy liczbami'
+              + ' za pomocją spacji.')
+        print('Można wprowadzać liczbę zespoloną za pomocą wzoru a+bj,'
+              + ' gdzie a to część rzeczywista, a b zespolona.'
+              + ' Przykładem jest liczba 3+2j.')
 
         matrix = []
 
         for row_i in range(dimension):
             while True:
-                print('\nWprowadź wartości dla ' + str(row_i+1) + '-tego wiersza.')
+                print('\nWprowadź wiersz numer ' + str(row_i+1) + '.')
                 row = input('Wpisz tutaj: ').split(' ')
 
                 if row[-1] == '':
@@ -134,11 +139,11 @@ class Cli_app():
                         break
 
                     except ValueError:
-                        print('\nWprowadź liczby złożone!')
+                        print('\nProsimy wprowadzać liczby złożone!')
 
         self.matrix = Matrix(matrix)
 
-        print('\Macierz została zapisywana.')
+        print('\nMacierz została zapisana.')
 
     def qr_decomposition(self):
         """
@@ -148,15 +153,15 @@ class Cli_app():
         """
 
         if self.matrix is None:
-            print('\nMusisz wprowadzić macierz!')
-            print('Aby wprowadzić macierz, należy użyć polecenia "matrix".')
+            print('\nMusisz najpierw wprowadzić macierz!')
+            print('Aby wprowadzić macierz należy użyć komendy "matrix".')
 
         else:
             if self.Q is not None and self.R is not None:
                 print('\nMacierz ortogonalna Q:')
                 print(self.Q.matrix)
 
-                print('\nMacierz górno trójkątna R:')
+                print('\nMacierz górnotrójkątna R:')
                 print(self.R.matrix)
 
             else:
@@ -168,7 +173,7 @@ class Cli_app():
                 print('\nMacierz ortogonalna Q:')
                 print(Q.matrix)
 
-                print('\nMacierz górno trójkątna R:')
+                print('\nMacierz górnotrójkątna R:')
                 print(R.matrix)
 
     def qr_algorithm(self):
@@ -184,12 +189,12 @@ class Cli_app():
         """
 
         if self.matrix is None:
-            print('\nMusisz wprowadzić macierz!')
-            print('Użyj polecenia "matrix".')
+            print('\nMusisz najpierw wprowadzić macierz!')
+            print('Aby wprowadzić macierz należy użyć komendy "matrix".')
 
         else:
             while True:
-                print('\nJaka będzie górna granica'
+                print('\nJakie jest maksymalnie ograniczenie liczby'
                       + ' możliwych iteracji rozkładów QR'
                       + ' w algorytmie QR?')
                 try:
@@ -205,18 +210,21 @@ class Cli_app():
                     print('\nWprowadź liczbę całkowitą!')
 
             while True:
-                print('\nJaka będzie tolerancja wartości?')
+                print('\nJaka jest maksymalna tolerancja wartości?')
                 try:
                     eps = float(input('Wpisz tutaj: '))
 
-                    if eps > 0:
+                    if eps > 0 and eps < 1:
                         break
 
+                    elif eps < 1:
+                        print('\nWprowadź liczbę wymierną mniejszą od 1!')
+
                     else:
-                        print('\nWprowadź dodatnią liczbe wymierną!')
+                        print('\nWprowadź dodatnią liczbę wymierną!')
 
                 except ValueError:
-                    print('\nWprowadź liczbe wymierną!')
+                    print('\nWprowadź liczbę wymierną!')
 
             is_new = not self.old_n_max == n_max or not self.old_eps == eps
 

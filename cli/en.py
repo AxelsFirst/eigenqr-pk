@@ -18,7 +18,7 @@ class Cli_app():
         self.matrix = None
 
         self.Q = None
-        self.R
+        self.R = None
 
         self.qr_algo = None
         self.old_n_max = None

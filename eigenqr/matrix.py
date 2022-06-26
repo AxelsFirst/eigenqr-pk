@@ -178,10 +178,11 @@ class Matrix(object):
 
         """
 
-        from scipy import linalg as la
+        from scipy.linalg import hessenberg
+        from cmath import sqrt
 
-        H = Matrix(la.hessenberg(self.matrix))
-        n = H.matrix.shape[0]
+        H = Matrix(hessenberg(self.matrix))
+        n = H.dimension
 
         for i in range(n_max):
             Q, R = H.qr_decomposition()
@@ -202,13 +203,15 @@ class Matrix(object):
                 b = H.matrix[i, i+1]
                 c = H.matrix[i+1, i]
                 d = H.matrix[i+1, i+1]
-                B = -1*(a+d)
-                C = a*d - b*c
-                eigen_plus = (-B + np.sqrt(B**2 - 4*C))/2
-                eigen_minus = (-B - np.sqrt(B**2 - 4*C))/2
 
-                eigenvalues.append(eigen_plus)
-                eigenvalues.append(eigen_minus)
+                e = -1*(a+d)
+                f = a*d - b*c
+
+                alpha = (-e + sqrt(e**2 - 4*f))/2
+                beta = (-e - sqrt(e**2 - 4*f))/2
+
+                eigenvalues.append(alpha)
+                eigenvalues.append(beta)
 
                 i += 1
             i += 1

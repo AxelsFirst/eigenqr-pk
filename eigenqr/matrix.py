@@ -8,7 +8,7 @@ class Matrix(object):
 
     """
 
-    def __new__(cls, matrix):
+    def __new__(cls, matrix, check_if_square=False, *args, **kwargs):
         """
 
         Checks if matrix is a square matrix before creating an object
@@ -25,12 +25,14 @@ class Matrix(object):
 
         matrix = np.array(matrix)
 
-        if matrix.shape[0] != matrix.shape[1]:
+        if check_if_square and matrix.shape[0] != matrix.shape[1]:
             raise ValueError("Matrix is nost a square matrix!")
 
-        return super(Matrix, cls).__new__(cls, matrix)
+        Matrix_instance = super(Matrix, cls).__new__(cls, *args, **kwargs)
 
-    def __init__(self, matrix):
+        return Matrix_instance
+
+    def __init__(self, matrix, *args, **kwargs):
         """
 
         Parameters:
@@ -38,6 +40,8 @@ class Matrix(object):
         matrix: a two dimensional array.
 
         """
+
+        super().__init__(*args, **kwargs)
 
         self.matrix = matrix
         self.dimension = matrix.shape[0]

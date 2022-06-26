@@ -91,10 +91,12 @@ class Cli_app():
 
         while True:
             print('What will be the dimension of the matrix?')
+            print('Please remember, that we recommend using a matrix of a'
+                  + ' dimension greater or equal than 5')
             try:
                 dimension = int(input('Type here: '))
 
-                if dimension > 0:
+                if dimension > 4:
                     break
 
                 else:
@@ -217,7 +219,7 @@ class Cli_app():
             is_new = not self.old_n_max == n_max or not self.old_eps == eps
 
             if is_new or self.eigenvalues is None:
-                self.eigenvalues = self.matrix.qr_algorithm()
+                self.eigenvalues = self.matrix.qr_algorithm(n_max, eps)
                 self.old_n_max = n_max
                 self.old_eps = eps
 

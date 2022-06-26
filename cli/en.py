@@ -49,11 +49,11 @@ class Cli_app():
         print('\n   List of possible commands:')
 
         print('\nmatrix: input a matrix')
-        print('deco: QR decomposition')
-        print('algo: QR algorithm')
-        print('intro: info')
-        print('help: list of commands')
-        print('end: close the app')
+        print('deco:   QR decomposition')
+        print('algo:   QR algorithm')
+        print('intro:  info')
+        print('help:   list of commands')
+        print('end:    close the app')
 
         print('\nFor example, to use command "matrix", type "matrix".')
 
@@ -209,8 +209,11 @@ class Cli_app():
                 try:
                     eps = float(input('Type here: '))
 
-                    if eps > 0:
+                    if eps > 0 and eps < 1:
                         break
+
+                    elif eps < 1:
+                        print('\nPlease input a float smaller than 1!')
 
                     else:
                         print('\nPlease input a positive float!')

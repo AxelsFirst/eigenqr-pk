@@ -218,7 +218,7 @@ class Cli_app():
                         break
 
                     elif eps < 1:
-                        print('\nWprowadź liczbę wymierną mniejszą od 1!')
+                        print('\nWprowadź liczbę wymierną mniejszą od 1!')
 
                     else:
                         print('\nWprowadź dodatnią liczbę wymierną!')

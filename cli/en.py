@@ -46,7 +46,7 @@ class Cli_app():
 
         """
 
-        print('List of commands:')
+        print('List of possible commands:')
 
         print('matrix: input a matrix')
         print('deco: QR decomposition')
@@ -54,6 +54,8 @@ class Cli_app():
         print('intro: info')
         print('help: list of commands')
         print('end: close the app')
+
+        print('To use command "x", type "x".')
 
     def wrong_input(self):
         """

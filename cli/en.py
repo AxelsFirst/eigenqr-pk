@@ -20,7 +20,7 @@ class Cli_app():
         self.Q = None
         self.R = None
 
-        self.qr_algo = None
+        self.eigenvalues = None
         self.old_n_max = None
         self.old_eps = None
 
@@ -137,3 +137,66 @@ class Cli_app():
 
             print('Upper triangular matrix R:')
             print(R.matrix)
+
+    def qr_algorithm(self):
+        """
+
+        Calculates eigenvalues of a matrix using the QR algorithm
+
+        Parameters:
+        -----------
+        n_max: an integer.
+        eps: a float.
+
+        """
+
+        while True:
+            print('What will be the upper limit of the number of possible '
+                  + 'iterations of the QR decompositions during QR algorithm?')
+            try:
+                n_max = int(input('Type here: '))
+
+                if n_max > 0:
+                    break
+
+                else:
+                    print('Please input a positive integer!')
+
+            except ValueError:
+                print('Please input an integer!')
+
+        while True:
+            print('What will be the tolerance of the values?')
+            try:
+                eps = float(input('Type here: '))
+
+                if eps > 0:
+                    break
+
+                else:
+                    print('Please input a positive float!')
+
+            except ValueError:
+                print('Please input an float!')
+
+        is_new = not self.old_n_max == n_max or not self.old_eps == eps
+
+        if is_new or self.eigenvalues is None:
+            self.eigenvalues = self.matrix.qr_algorithm()
+            self.old_n_max = n_max
+            self.old_eps = eps
+
+            values = ''
+            for eigenvalue in self.eigenvalues:
+                values = values + ' ' + str(eigenvalue)
+
+            print('Eigenvalues of a matrix:')
+            print(values)
+
+        else:
+            values = ''
+            for eigenvalue in self.eigenvalues:
+                values = values + ' ' + str(eigenvalue)
+
+            print('Eigenvalues of a matrix:')
+            print(values)

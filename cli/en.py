@@ -1,88 +1,106 @@
 from eigenqr.matrix import Matrix
 
 
-def intro():
+class Cli_app():
     """
 
-    Function will display basic informations about our project.
-
-    """
-
-    print('EigenQR-PK')
-
-    print('Brought by:')
-    print('Julia Bugaj, Dawid Kapcia, Alex Gibała, Szymon Forysiuk')
-
-    print("The aim of our project is to implement a QR algorithm to calculate"
-          + "eigenvalues of a matrix.")
-
-
-def help():
-    """
-
-    Function will display list of possible commands.
+    Class for a CLI app.
 
     """
 
-    print('List of commands:')
+    def __init__(self):
+        """
 
-    print('matrix: input a matrix')
-    print('deco: QR decomposition')
-    print('algo: QR algorithm')
-    print('intro: info')
-    print('help: list of commands')
-    print('end: close the app')
+        """
 
+        self.matrix = None
+        self.qr_deco = None
+        self.qr_algo = None
 
-def input_matrix():
-    """
+    def intro(self):
+        """
 
-    Input a matrix to the app.
+        Function will display basic informations about our project.
 
-    """
+        """
 
-    while True:
-        print('What will be the dimension of the matrix?')
-        try:
-            dimension = int(input('Type here: '))
+        print('EigenQR-PK')
 
-            if dimension > 0:
-                break
+        print('Brought by:')
+        print('Julia Bugaj, Dawid Kapcia, Alex Gibała, Szymon Forysiuk')
 
-            else:
-                print('Please input a positive integer!')
+        print("The aim of our project is to implement a QR algorithm to"
+              + " calculate eigenvalues of a matrix.")
 
-        except ValueError:
-            print('Please input an integer!')
+    def help(self):
+        """
 
-    print('What will be the values of a matrix?')
-    print('Please remember to split numbers using space.')
-    print('Write complex values for example as 2+3j.')
+        Function will display list of possible commands.
 
-    matrix = []
+        """
 
-    for row_i in range(dimension):
+        print('List of commands:')
+
+        print('matrix: input a matrix')
+        print('deco: QR decomposition')
+        print('algo: QR algorithm')
+        print('intro: info')
+        print('help: list of commands')
+        print('end: close the app')
+
+    def input_matrix(self):
+        """
+
+        Input a matrix to the app.
+
+        """
+
+        self.Matrix = None
+        self.qr_deco = None
+        self.qr_algo = None
+
         while True:
-            print('Input the values of the ' + row_i + '-th row.')
-            row = input('Type here: ').split(' ')
-
-            if row[-1] == '':
-                row.pop(-1)
-
-            if len(row) < dimension:
-                print('Not enough inputed variables!')
-
-            elif len(row) > dimension:
-                print('Too many inputed variables!')
-
+            print('What will be the dimension of the matrix?')
             try:
-                for col_i in range(dimension):
-                    row[col_i] = complex(row[col_i])
+                dimension = int(input('Type here: '))
 
-                matrix.append(row)
-                break
+                if dimension > 0:
+                    break
+
+                else:
+                    print('Please input a positive integer!')
 
             except ValueError:
-                print('Please input complex numbers!')
+                print('Please input an integer!')
 
-    return Matrix(matrix)
+        print('What will be the values of a matrix?')
+        print('Please remember to split numbers using space.')
+        print('Write complex values for example as 2+3j.')
+
+        matrix = []
+
+        for row_i in range(dimension):
+            while True:
+                print('Input the values of the ' + row_i + '-th row.')
+                row = input('Type here: ').split(' ')
+
+                if row[-1] == '':
+                    row.pop(-1)
+
+                if len(row) < dimension:
+                    print('Not enough inputed variables!')
+
+                elif len(row) > dimension:
+                    print('Too many inputed variables!')
+
+                try:
+                    for col_i in range(dimension):
+                        row[col_i] = complex(row[col_i])
+
+                    matrix.append(row)
+                    break
+
+                except ValueError:
+                    print('Please input complex numbers!')
+
+        self.matrix = Matrix(matrix)

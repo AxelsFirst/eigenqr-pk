@@ -77,7 +77,8 @@ class Cli_app():
 
         """
 
-        user_command = input('\nWpisz tutaj: ')
+        print('\nPodaj komendę poniżej.')
+        user_command = input('Wpisz tutaj: ')
 
         return user_command
 
@@ -289,21 +290,20 @@ class Cli_app():
         """
 
         while True:
-            print('\nJaka jest maksymalna tolerancja wartości?')
+            print('\nJaka jest precyzja wartości?')
+            print('Proszę zauważyć, że w celu ustawienia precyzji do'
+                  + ' drugiego miejsca po przecinku, należy wpisać "2".')
             try:
-                n = float(input('Type here: '))
+                n = int(input('Type here: '))
 
-                if n > 0 and n < 1:
+                if n > 0:
                     break
 
-                elif n < 1:
-                    print('\nWprowadź liczbę wymierną mniejszą od 1!')
-
                 else:
-                    print('\nWprowadź dodatnią liczbę wymierną!')
+                    print('\nWprowadź dodatnią liczbę całkowitą!')
 
             except ValueError:
-                print('\nWprowadź liczbę wymierną!')
+                print('\nWprowadź liczbę całkowitą!')
 
         np.set_printoptions(precision=n)
 

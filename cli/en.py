@@ -76,7 +76,8 @@ class Cli_app():
 
         """
 
-        user_command = input('\nType here: ')
+        print('\nPlease type your command below.')
+        user_command = input('Type here: ')
 
         return user_command
 
@@ -282,7 +283,9 @@ class Cli_app():
         """
 
         while True:
-            print('\nWhat will be the tolerance of the values?')
+            print('\nWhat will be the precision of the values?')
+            print('Please note that to have the precision to the'
+                  + ' second place after coma, input "2".')
             try:
                 n = int(input('Type here: '))
 

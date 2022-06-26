@@ -11,11 +11,18 @@ class Cli_app():
     def __init__(self):
         """
 
+        Atributes will be set by methods.
+
         """
 
         self.matrix = None
-        self.qr_deco = None
+
+        self.Q = None
+        self.R
+
         self.qr_algo = None
+        self.old_n_max = None
+        self.old_eps = None
 
     def intro(self):
         """
@@ -104,3 +111,29 @@ class Cli_app():
                     print('Please input complex numbers!')
 
         self.matrix = Matrix(matrix)
+
+    def qr_decomposition(self):
+        """
+
+        Calculates QR decomposition of a previously inputed matrix.
+
+        """
+
+        if self.Q is not None and self.R is not None:
+            print('Orthogonal matrix Q:')
+            print(self.Q)
+
+            print('Upper triangular matrix R:')
+            print(self.R)
+
+        else:
+            Q, R = self.matrix.qr_decomposition()
+
+            self.Q = Q
+            self.R = R
+
+            print('Orthogonal matrix Q:')
+            print(Q.matrix)
+
+            print('Upper triangular matrix R:')
+            print(R.matrix)

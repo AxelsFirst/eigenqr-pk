@@ -111,7 +111,7 @@ class Cli_app():
 
         for row_i in range(dimension):
             while True:
-                print('Input the values of the ' + row_i + '-th row.')
+                print('Input the values of the ' + str(row_i) + '-th row.')
                 row = input('Type here: ').split(' ')
 
                 if row[-1] == '':
@@ -123,15 +123,16 @@ class Cli_app():
                 elif len(row) > dimension:
                     print('Too many inputed variables!')
 
-                try:
-                    for col_i in range(dimension):
-                        row[col_i] = complex(row[col_i])
+                else:
+                    try:
+                        for col_i in range(dimension):
+                            row[col_i] = complex(row[col_i])
 
-                    matrix.append(row)
-                    break
+                        matrix.append(row)
+                        break
 
-                except ValueError:
-                    print('Please input complex numbers!')
+                    except ValueError:
+                        print('Please input complex numbers!')
 
         self.matrix = Matrix(matrix)
 
@@ -142,24 +143,29 @@ class Cli_app():
 
         """
 
-        if self.Q is not None and self.R is not None:
-            print('Orthogonal matrix Q:')
-            print(self.Q)
-
-            print('Upper triangular matrix R:')
-            print(self.R)
+        if self.matrix is None:
+            print('You need to input a matrix!')
+            print('Please use command "matrix".\n')
 
         else:
-            Q, R = self.matrix.qr_decomposition()
+            if self.Q is not None and self.R is not None:
+                print('Orthogonal matrix Q:')
+                print(self.Q)
 
-            self.Q = Q
-            self.R = R
+                print('Upper triangular matrix R:')
+                print(self.R)
 
-            print('Orthogonal matrix Q:')
-            print(Q.matrix)
+            else:
+                Q, R = self.matrix.qr_decomposition()
 
-            print('Upper triangular matrix R:')
-            print(R.matrix)
+                self.Q = Q
+                self.R = R
+
+                print('Orthogonal matrix Q:')
+                print(Q.matrix)
+
+                print('Upper triangular matrix R:')
+                print(R.matrix)
 
     def qr_algorithm(self):
         """
@@ -173,53 +179,59 @@ class Cli_app():
 
         """
 
-        while True:
-            print('What will be the upper limit of the number of possible '
-                  + 'iterations of the QR decompositions during QR algorithm?')
-            try:
-                n_max = int(input('Type here: '))
-
-                if n_max > 0:
-                    break
-
-                else:
-                    print('Please input a positive integer!')
-
-            except ValueError:
-                print('Please input an integer!')
-
-        while True:
-            print('What will be the tolerance of the values?')
-            try:
-                eps = float(input('Type here: '))
-
-                if eps > 0:
-                    break
-
-                else:
-                    print('Please input a positive float!')
-
-            except ValueError:
-                print('Please input an float!')
-
-        is_new = not self.old_n_max == n_max or not self.old_eps == eps
-
-        if is_new or self.eigenvalues is None:
-            self.eigenvalues = self.matrix.qr_algorithm()
-            self.old_n_max = n_max
-            self.old_eps = eps
-
-            values = ''
-            for eigenvalue in self.eigenvalues:
-                values = values + ' ' + str(eigenvalue)
-
-            print('Eigenvalues of a matrix:')
-            print(values)
+        if self.matrix is None:
+            print('You need to input a matrix!')
+            print('Please use command "matrix".\n')
 
         else:
-            values = ''
-            for eigenvalue in self.eigenvalues:
-                values = values + ' ' + str(eigenvalue)
+            while True:
+                print('What will be the upper limit of the number of possible '
+                      + 'iterations of the QR decompositions during QR '
+                      + 'algorithm?')
+                try:
+                    n_max = int(input('Type here: '))
 
-            print('Eigenvalues of a matrix:')
-            print(values)
+                    if n_max > 0:
+                        break
+
+                    else:
+                        print('Please input a positive integer!')
+
+                except ValueError:
+                    print('Please input an integer!')
+
+            while True:
+                print('What will be the tolerance of the values?')
+                try:
+                    eps = float(input('Type here: '))
+
+                    if eps > 0:
+                        break
+
+                    else:
+                        print('Please input a positive float!')
+
+                except ValueError:
+                    print('Please input an float!')
+
+            is_new = not self.old_n_max == n_max or not self.old_eps == eps
+
+            if is_new or self.eigenvalues is None:
+                self.eigenvalues = self.matrix.qr_algorithm()
+                self.old_n_max = n_max
+                self.old_eps = eps
+
+                values = ''
+                for eigenvalue in self.eigenvalues:
+                    values = values + ' ' + str(eigenvalue)
+
+                print('Eigenvalues of a matrix:')
+                print(values)
+
+            else:
+                values = ''
+                for eigenvalue in self.eigenvalues:
+                    values = values + ' ' + str(eigenvalue)
+
+                print('Eigenvalues of a matrix:')
+                print(values)

@@ -25,10 +25,10 @@ if __name__ == "__main__":
         if user_command == 'matrix':
             cli.input_matrix()
 
-        elif user_command == 'qr_decomposition':
+        elif user_command == 'deco':
             cli.qr_decomposition()
 
-        elif user_command == 'qr_algorithm':
+        elif user_command == 'algo':
             cli.qr_algorithm()
 
         elif user_command == 'intro':
@@ -37,7 +37,7 @@ if __name__ == "__main__":
         elif user_command == 'help':
             cli.help()
 
-        elif user_command == 'break':
+        elif user_command == 'end':
             break
 
         else:

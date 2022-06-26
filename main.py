@@ -3,13 +3,17 @@ if __name__ == "__main__":
     while True:
         lang = input('Choose language / Wybierz język [EN/pl]: ').lower()
         if lang == 'en' or lang == '':
-            import cli.en as cli
+            import cli.en as app
             break
+
         elif lang == 'pl':
-            import cli.pl as cli
+            import cli.pl as app
             break
+
         else:
             print('Wrong input! Try again:')
+
+    cli = app.Cli_app()
 
     cli.intro()
 

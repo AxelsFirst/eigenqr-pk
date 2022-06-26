@@ -55,6 +55,16 @@ class Cli_app():
         print('help: list of commands')
         print('end: close the app')
 
+    def wrong_input(self):
+        """
+
+        Note that user inputed wrong command.
+
+        """
+
+        print('Wrong command!')
+        print('To check what commands are possible, type "help".')
+
     def input_matrix(self):
         """
 

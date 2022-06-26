@@ -154,21 +154,3 @@ class Matrix(object):
             i += 1
 
         return eigenvalues
-
-
-def identity_matrix(n):
-    """
-
-    Create identity Matrix
-
-    Parameters:
-    -----------
-    n: an integer.
-
-    Output:
-    -------
-    I_n: an instance of a Matrix class.
-
-    """
-
-    return Matrix(np.identity(n))

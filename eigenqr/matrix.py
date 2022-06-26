@@ -4,11 +4,32 @@ import numpy as np
 class Matrix(object):
     """
 
-    Representation of matrices.
+    Representation of square matrices.
 
     """
 
-    def __init__(self, matrix, is_square=False):
+    def __new__(cls, matrix):
+        """
+
+        Checks if matrix is a square matrix before creating an object
+
+        Parameters:
+        -----------
+        matrix: a two dimensional array.
+
+        Output:
+        Matrix: an instance of a Matrix class.
+
+        """
+
+        matrix = np.array(matrix)
+
+        if matrix.shape[0] != matrix.shape[1]:
+            raise ValueError("Matrix is nost a square matrix!")
+
+        return super(Matrix, cls).__new__(cls, matrix)
+
+    def __init__(self, matrix):
         """
 
         Parameters:
@@ -17,7 +38,8 @@ class Matrix(object):
 
         """
 
-        self.matrix = np.array(matrix)
+        self.matrix = matrix
+        self.dimension = matrix.shape[0]
 
     def __add__(self, other):
         """

@@ -4,7 +4,7 @@
 A CLI app written in Python for calculating eigenvalues using QR algorithm.
 
 ## Instalation
-TBD.
+We only support Windows systems. Please download .exe file, then run it.
 
 ## Usage
 App will ask you to choose prefered language. There are two languages to choose (english and polish). Note that in order to change language of the app, you need to restart the process.

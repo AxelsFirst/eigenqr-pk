@@ -1,3 +1,6 @@
+from eigenqr.matrix import Matrix
+
+
 def intro():
     """
 
@@ -29,3 +32,57 @@ def help():
     print('intro: info')
     print('help: list of commands')
     print('end: close the app')
+
+
+def input_matrix():
+    """
+
+    Input a matrix to the app.
+
+    """
+
+    while True:
+        print('What will be the dimension of the matrix?')
+        try:
+            dimension = int(input('Type here: '))
+
+            if dimension > 0:
+                break
+
+            else:
+                print('Please input a positive integer!')
+
+        except ValueError:
+            print('Please input an integer!')
+
+    print('What will be the values of a matrix?')
+    print('Please remember to split numbers using space.')
+    print('Write complex values for example as 2+3j.')
+
+    matrix = []
+
+    for row_i in range(dimension):
+        while True:
+            print('Input the values of the ' + row_i + '-th row.')
+            row = input('Type here: ').split(' ')
+
+            if row[-1] == '':
+                row.pop(-1)
+
+            if len(row) < dimension:
+                print('Not enough inputed variables!')
+
+            elif len(row) > dimension:
+                print('Too many inputed variables!')
+
+            try:
+                for col_i in range(dimension):
+                    row[col_i] = complex(row[col_i])
+
+                matrix.append(row)
+                break
+
+            except ValueError:
+                print('Please input complex numbers!')
+
+    return Matrix(matrix)

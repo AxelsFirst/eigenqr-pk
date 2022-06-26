@@ -18,6 +18,7 @@ class Matrix(object):
         matrix: a two dimensional array.
 
         Output:
+        -------
         Matrix: an instance of a Matrix class.
 
         """

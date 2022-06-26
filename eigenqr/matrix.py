@@ -23,9 +23,9 @@ class Matrix(object):
 
         """
 
-        matrix = np.array(matrix)
+        t_matrix = np.array(matrix)
 
-        if check_if_square and matrix.shape[0] != matrix.shape[1]:
+        if check_if_square and t_matrix.shape[0] != t_matrix.shape[1]:
             raise ValueError("Matrix is nost a square matrix!")
 
         Matrix_instance = super(Matrix, cls).__new__(cls, *args, **kwargs)
@@ -43,8 +43,8 @@ class Matrix(object):
 
         super().__init__(*args, **kwargs)
 
-        self.matrix = matrix
-        self.dimension = matrix.shape[0]
+        self.matrix = np.array(matrix)
+        self.dimension = self.matrix.shape[0]
 
     def __add__(self, other):
         """

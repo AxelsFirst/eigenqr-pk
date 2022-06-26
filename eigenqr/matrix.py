@@ -61,6 +61,58 @@ class Matrix(object):
         else:
             return Matrix(np.matmul(self.matrix, other.matrix))
 
+    def get_shape(self):
+        """
+
+        Get the dimnensions of a matrix
+
+        Output:
+        -------
+        shape: a list.
+
+        """
+
+        return self.matrix.shape
+
+    def get_num_rows(self):
+        """
+
+        Get the vertical dimension of a matrix
+
+        Output:
+        -------
+        num_rows: an integer.
+
+        """
+
+        return self.get_shape()[0]
+
+    def get_num_cols(self):
+        """
+
+        Get the horizontal dimension of a matrix
+
+        Output:
+        -------
+        num_cols: an integer.
+
+        """
+
+        return self.get_shape()[1]
+
+    def check_square(self):
+        """
+
+        Check whether matrix is a square matrix
+
+        Output:
+        -------
+        is_square: a boolean.
+
+        """
+
+        return self.get_num_rows() == self.get_num_cols()
+
     def qr_decomposition(self):
         """
 

@@ -164,7 +164,7 @@ class Cli_app():
                 np.set_printoptions(threshold=np.inf)
                 np.set_printoptions(precision=n)
 
-                print('\nOrthogonal matrix Q:')
+                print('\nUnitary matrix Q:')
                 print(self.Q.matrix)
 
                 np.set_printoptions(threshold=np.inf)
@@ -184,7 +184,7 @@ class Cli_app():
                 np.set_printoptions(threshold=np.inf)
                 np.set_printoptions(precision=n)
 
-                print('\nOrthogonal matrix Q:')
+                print('\nUnitary matrix Q:')
                 print(Q.matrix)
 
                 np.set_printoptions(threshold=np.inf)

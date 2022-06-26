@@ -170,7 +170,7 @@ class Cli_app():
                 np.set_printoptions(threshold=np.inf)
                 np.set_printoptions(precision=n)
 
-                print('\nMacierz ortogonalna Q:')
+                print('\nMacierz unitarna Q:')
                 print(self.Q.matrix)
 
                 np.set_printoptions(threshold=np.inf)
@@ -191,7 +191,7 @@ class Cli_app():
                 np.set_printoptions(threshold=np.inf)
                 np.set_printoptions(precision=n)
 
-                print('\nMacierz ortogonalna Q:')
+                print('\nMacierz unitarna Q:')
                 print(Q.matrix)
 
                 np.set_printoptions(threshold=np.inf)

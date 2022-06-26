@@ -148,7 +148,7 @@ class Matrix(object):
         Output:
         -------
         Q: an instance of a Matrix class
-            Q is orthogonal
+            Q is unitary
 
         R: an instance of a Matrix class
             R is upper triangular

@@ -49,11 +49,11 @@ class Cli_app():
         print('\n   Lista możliwych komend:')
 
         print('\nmatrix: wprowadź macierz,')
-        print('deco:     dokonać rozkładu QR,')
-        print('algo:     dokonać algorytmu QR,')
-        print('intro:    podstawowe informacje,')
-        print('help:     lista komend,')
-        print('end:      wyjście z aplikacji,')
+        print('deco:   dokonać rozkładu QR,')
+        print('algo:   dokonać algorytmu QR,')
+        print('intro:  podstawowe informacje,')
+        print('help:   lista komend,')
+        print('end:    wyjście z aplikacji,')
 
         print('\nPrzykładowo w celu wprowadzenia macierzy wpisz'
               + ' w wiersz polecenia komendę "matrix".')

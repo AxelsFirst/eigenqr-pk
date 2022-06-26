@@ -65,6 +65,17 @@ class Cli_app():
         print('Wrong command!')
         print('To check what commands are possible, type "help".')
 
+    def user_input(self):
+        """
+
+        Take user's input as a command.
+
+        """
+
+        user_command = input('Type here: ')
+
+        return user_command
+
     def input_matrix(self):
         """
 

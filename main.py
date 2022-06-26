@@ -1,5 +1,6 @@
 if __name__ == "__main__":
 
+    print('\nPre-launch settings / Ustawienia uruchomienia aplikacji\n')
     while True:
         lang = input('Choose language / Wybierz język [EN/pl]: ').lower()
         if lang == 'en' or lang == '':
@@ -11,7 +12,7 @@ if __name__ == "__main__":
             break
 
         else:
-            print('Wrong input! Try again:')
+            print('\nWrong input! Try again.')
 
     cli = app.Cli_app()
 

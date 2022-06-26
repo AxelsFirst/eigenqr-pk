@@ -8,7 +8,7 @@ class Matrix(object):
 
     """
 
-    def __init__(self, matrix):
+    def __init__(self, matrix, is_square=False):
         """
 
         Parameters:

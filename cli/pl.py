@@ -1,4 +1,5 @@
 from eigenqr.matrix import Matrix
+import numpy as np
 
 
 class Cli_app():
@@ -51,7 +52,8 @@ class Cli_app():
         print('\nmatrix: wprowadź macierz,')
         print('deco:   dokonać rozkładu QR,')
         print('algo:   dokonać algorytmu QR,')
-        print('intro:  podstawowe informacje,')
+        print('prec:   ustawienie dokładności wyświetlania w deco,')
+        print('intro:  wprowadzenie do aplikacji,')
         print('help:   lista komend,')
         print('end:    wyjście z aplikacji,')
 
@@ -145,10 +147,14 @@ class Cli_app():
 
         print('\nMacierz została zapisana.')
 
-    def qr_decomposition(self):
+    def qr_decomposition(self, n):
         """
 
         Calculates QR decomposition of a previously inputed matrix.
+
+        Parameters:
+        -----------
+        n: an integer.
 
         """
 
@@ -158,8 +164,17 @@ class Cli_app():
 
         else:
             if self.Q is not None and self.R is not None:
+                print('Wiersze są posegregowane za pomocą'
+                      + ' nawiasów kwadratowych.')
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nMacierz ortogonalna Q:')
                 print(self.Q.matrix)
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
 
                 print('\nMacierz górnotrójkątna R:')
                 print(self.R.matrix)
@@ -170,21 +185,29 @@ class Cli_app():
                 self.Q = Q
                 self.R = R
 
+                print('Wiersze są posegregowane za pomocą'
+                      + ' nawiasów kwadratowych.')
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nMacierz ortogonalna Q:')
                 print(Q.matrix)
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
 
                 print('\nMacierz górnotrójkątna R:')
                 print(R.matrix)
 
-    def qr_algorithm(self):
+    def qr_algorithm(self, n):
         """
 
         Calculates eigenvalues of a matrix using the QR algorithm
 
         Parameters:
         -----------
-        n_max: an integer.
-        eps: a float.
+        n: an integer.
 
         """
 
@@ -237,6 +260,9 @@ class Cli_app():
                 for eigenvalue in self.eigenvalues:
                     values = values + ' ' + str(eigenvalue)
 
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nWartości własne macierzy:')
                 print(values)
 
@@ -245,5 +271,40 @@ class Cli_app():
                 for eigenvalue in self.eigenvalues:
                     values = values + ' ' + str(eigenvalue)
 
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nWartości własne macierzy:')
                 print(values)
+
+    def precision(self):
+        """
+
+        Set precision of printing
+
+        Parameters:
+        -----------
+        n: an integer.
+
+        """
+
+        while True:
+            print('\nJaka jest maksymalna tolerancja wartości?')
+            try:
+                n = float(input('Type here: '))
+
+                if n > 0 and n < 1:
+                    break
+
+                elif n < 1:
+                    print('\nWprowadź liczbę wymierną mniejszą od 1!')
+
+                else:
+                    print('\nWprowadź dodatnią liczbę wymierną!')
+
+            except ValueError:
+                print('\nWprowadź liczbę wymierną!')
+
+        np.set_printoptions(precision=n)
+
+        return n

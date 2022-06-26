@@ -1,4 +1,5 @@
 from eigenqr.matrix import Matrix
+import numpy as np
 
 
 class Cli_app():
@@ -36,8 +37,8 @@ class Cli_app():
         print('\nBrought by:')
         print('Julia Bugaj, Dawid Kapcia, Alex Gibała, Szymon Forysiuk')
 
-        print("\nThe aim of our project is to implement a QR algorithm to"
-              + " calculate eigenvalues of a matrix.")
+        print("\nThe aim of our project is to create an app a to calculate"
+              + " eigenvalues of a matrix using a QR algorithm.")
 
     def help(self):
         """
@@ -48,12 +49,13 @@ class Cli_app():
 
         print('\n   List of possible commands:')
 
-        print('\nmatrix: input a matrix')
-        print('deco:   QR decomposition')
-        print('algo:   QR algorithm')
-        print('intro:  info')
-        print('help:   list of commands')
-        print('end:    close the app')
+        print('\nmatrix: input a matrix,')
+        print('deco:   QR decomposition,')
+        print('algo:   QR algorithm,')
+        print('prec:   set the precision of printing in deco,')
+        print('intro:  introducion to application,')
+        print('help:   list of commands,')
+        print('end:    close the app.')
 
         print('\nFor example, to use command "matrix", type "matrix".')
 
@@ -140,10 +142,14 @@ class Cli_app():
 
         print('\nMatrix is saved.')
 
-    def qr_decomposition(self):
+    def qr_decomposition(self, n):
         """
 
         Calculates QR decomposition of a previously inputed matrix.
+
+        Parameters:
+        -----------
+        n: an integer.
 
         """
 
@@ -153,8 +159,16 @@ class Cli_app():
 
         else:
             if self.Q is not None and self.R is not None:
+                print('Rows are grouped together using brackets.')
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nOrthogonal matrix Q:')
                 print(self.Q.matrix)
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
 
                 print('\nUpper triangular matrix R:')
                 print(self.R.matrix)
@@ -165,21 +179,28 @@ class Cli_app():
                 self.Q = Q
                 self.R = R
 
+                print('Rows are grouped together using brackets.')
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nOrthogonal matrix Q:')
                 print(Q.matrix)
+
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
 
                 print('\nUpper triangular matrix R:')
                 print(R.matrix)
 
-    def qr_algorithm(self):
+    def qr_algorithm(self, n):
         """
 
         Calculates eigenvalues of a matrix using the QR algorithm
 
         Parameters:
         -----------
-        n_max: an integer.
-        eps: a float.
+        n: an integer.
 
         """
 
@@ -219,7 +240,7 @@ class Cli_app():
                         print('\nPlease input a positive float!')
 
                 except ValueError:
-                    print('\nPlease input an float!')
+                    print('\nPlease input a float!')
 
             is_new = not self.old_n_max == n_max or not self.old_eps == eps
 
@@ -232,6 +253,9 @@ class Cli_app():
                 for eigenvalue in self.eigenvalues:
                     values = values + ' ' + str(eigenvalue)
 
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nEigenvalues of a matrix:')
                 print(values)
 
@@ -240,5 +264,37 @@ class Cli_app():
                 for eigenvalue in self.eigenvalues:
                     values = values + ' ' + str(eigenvalue)
 
+                np.set_printoptions(threshold=np.inf)
+                np.set_printoptions(precision=n)
+
                 print('\nEigenvalues of a matrix:')
                 print(values)
+
+    def precision(self):
+        """
+
+        Set precision of printing
+
+        Parameters:
+        -----------
+        n: an integer.
+
+        """
+
+        while True:
+            print('\nWhat will be the tolerance of the values?')
+            try:
+                n = int(input('Type here: '))
+
+                if n > 0:
+                    break
+
+                else:
+                    print('\nPlease input a positive integer!')
+
+            except ValueError:
+                print('\nPlease input an integer!')
+
+        np.set_printoptions(precision=n)
+
+        return n

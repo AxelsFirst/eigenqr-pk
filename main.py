@@ -1,8 +1,12 @@
 if __name__ == "__main__":
 
-    print('\nPre-launch settings / Ustawienia uruchomienia aplikacji\n')
+    print('\nPre-launch settings / Ustawienia uruchomienia aplikacji')
+    print('\nChoose language / Wybierz język')
+    print('\nTo choose english, type "en".')
+    print('Aby wybrać język polski, napisz "pl".')
+
     while True:
-        lang = input('Choose language / Wybierz język [EN/pl]: ').lower()
+        lang = input('Type here / Wpisz tutaj [EN/pl]: ').lower()
         if lang == 'en' or lang == '':
             import cli.en as app
             break
@@ -20,6 +24,8 @@ if __name__ == "__main__":
 
     cli.help()
 
+    n = 3
+
     while True:
         user_command = cli.user_input()
 
@@ -27,10 +33,13 @@ if __name__ == "__main__":
             cli.input_matrix()
 
         elif user_command == 'deco':
-            cli.qr_decomposition()
+            cli.qr_decomposition(n)
 
         elif user_command == 'algo':
-            cli.qr_algorithm()
+            cli.qr_algorithm(n)
+
+        elif user_command == 'prec':
+            n = cli.precision()
 
         elif user_command == 'intro':
             cli.intro()
